@@ -24,8 +24,12 @@
           <dd><%= @product.price %></dd>
           <dt>Reviews</dt>
           <dd>
-            <% @product.reviews.each do |review| %>
-              <%= render 'review', review: review %>
+            <% if @product.reviews.any? %>
+              <% @product.reviews.each do |review| %>
+                <%= render 'review', review: review %>
+              <% end %>
+            <% else %>
+              <em>There are currently no reviews for this product. Be the first!</em>
             <% end %>
           </dd>
         </dl>
