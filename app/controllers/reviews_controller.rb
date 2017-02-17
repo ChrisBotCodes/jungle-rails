@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
 
-
   def create
     @product = Product.find(params[:product_id])
     @review = current_user.reviews.build(review_params)
@@ -21,5 +20,7 @@ class ReviewsController < ApplicationController
       :description
     )
   end
+
+
 
 end
