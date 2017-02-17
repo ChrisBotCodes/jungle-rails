@@ -1,0 +1,21 @@
+<% if review %>
+  <div>
+  <% if review.rating == 1 %>
+    <%= fa_icon "star", class: "gold" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %>
+  <% elsif review.rating ==2 %>
+    <%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %>
+  <% elsif review.rating ==3 %>
+    <%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star-o" %><%= fa_icon "star-o" %>
+  <% elsif review.rating ==4 %>
+    <%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star-o" %>
+  <% else %>
+    <%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %>
+  <% end %>
+    (<em><%= review.rating %>/5</em>)
+    <br>
+    <%= review.description %>
+    <hr>
+  </div>
+<% else %>
+  <em>There are currently no reviews for this product. Be the first!</em>
+<% end %>
