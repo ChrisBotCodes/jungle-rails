@@ -24,20 +24,23 @@
           <dd><%= @product.price %></dd>
           <dt>Reviews</dt>
           <dd>
-
-            <%= form_for [@product, @review] do |f| %>
-              <u>Create a review</u>:
-              <div style="display: block">
-                <label style="margin: 5px; width: 100px">Rating</label><%= select(:review, :rating, [5, 4, 3, 2, 1], include_blank: true)%>
-              </div>
+            <% if current_user %>
+              <%= form_for [@product, @review] do |f| %>
+                <u>Create a review</u>:
+                <div style="display: block">
+                  <label style="margin: 5px; width: 100px">Rating</label><%= select(:review, :rating, [5, 4, 3, 2, 1], include_blank: true)%>
+                </div>
+                <br>
+                <div style="display: block">
+                  <label style="margin: 5px; width: 100px">Description</label><%= f.text_area :description, placeholder: "Describe your experience with this product (optional)" %>
+                </div>
+                <%= f.submit %>
+              <% end %>
+            <% else %>
               <br>
-              <div style="display: block">
-                <label style="margin: 5px; width: 100px">Description</label><%= f.text_area :description, placeholder: "Describe your experience with this product (optional)" %>
-              </div>
-              <%= f.submit %>
+              <em>You must be logged in to leave a review.</em><br><%= link_to "Login Here", login_path %>
             <% end %>
             <hr>
-            <br>
             <% if @product.reviews.any? %>
               <% @product.reviews.each do |review| %>
                 <%= render 'review', review: review %>

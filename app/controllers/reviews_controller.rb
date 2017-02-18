@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_filter :authorize, only: [:create, :destroy]
+
   def create
     @product = Product.find(params[:product_id])
     @review = current_user.reviews.build(review_params)
@@ -10,6 +12,12 @@ class ReviewsController < ApplicationController
     else
       redirect_to :back, notice: 'Your review must contain a rating.'
     end
+  end
+
+  def destroy
+    @review = Review.find params[:id]
+    @review.destroy
+    redirect_to product_path(params[:product_id]), notice: 'Review deleted!'
   end
 
   private

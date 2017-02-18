@@ -1,4 +1,4 @@
-<h1>Register!</h1>
+<h1>Register</h1>
 
 <%= form_for :user, url: '/users' do |f| %>
   <div style="display: block">
@@ -25,3 +25,5 @@
     <label style="margin: 5px;"><%= f.submit "Submit" %></label>
 
 <% end %>
+
+<h4>Already have an account? <%= link_to "Login", login_path %> here!</h4>
