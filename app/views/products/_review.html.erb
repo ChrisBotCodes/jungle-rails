@@ -10,7 +10,7 @@
   <% else %>
     <%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %><%= fa_icon "star", class: "gold" %>
   <% end %>
-  (<em><%= review.rating %>/5</em>)
+  (<em><%= review.rating %>/5) - <%= User.find(review.user_id).first_name %></em>
   <br>
   <%= review.description %>
   <% if current_user && current_user.id == review.user_id %>
