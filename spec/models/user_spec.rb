@@ -46,4 +46,27 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'finds a matching user in the database with correct email and password' do
+      @user = User.new(first_name: 'FirstName', last_name: 'LastName', email: 'test@example.com', password: 'secret', password_confirmation: 'secret')
+      @user.save
+      @user_check = User.authenticate_with_credentials('test@example.com', 'secret')
+      expect(@user_check).to be_truthy
+    end
+
+    it 'does not find a matching user in the database with incorrect email' do
+      @user = User.new(first_name: 'FirstName', last_name: 'LastName', email: 'test@example.com', password: 'secret', password_confirmation: 'secret')
+      @user.save
+      @user_check = User.authenticate_with_credentials('wrong@example.com', 'secret')
+      expect(@user_check).to be_nil
+    end
+
+    it 'does not find a matching user in the database with incorrect password' do
+      @user = User.new(first_name: 'FirstName', last_name: 'LastName', email: 'test@example.com', password: 'secret', password_confirmation: 'secret')
+      @user.save
+      @user_check = User.authenticate_with_credentials('test@example.com', 'wrongpassword')
+      expect(@user_check).to be_nil
+    end
+  end
 end
