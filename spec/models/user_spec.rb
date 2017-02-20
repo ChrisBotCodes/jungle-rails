@@ -68,5 +68,20 @@ RSpec.describe User, type: :model do
       @user_check = User.authenticate_with_credentials('test@example.com', 'wrongpassword')
       expect(@user_check).to be_nil
     end
+
+    it 'finds a matching user in the database with whitespace around email' do
+      @user = User.new(first_name: 'FirstName', last_name: 'LastName', email: 'test@example.com', password: 'secret', password_confirmation: 'secret')
+      @user.save
+      @user_check = User.authenticate_with_credentials('    test@example.com    ', 'secret')
+      expect(@user_check).to be_truthy
+    end
+
+    it 'finds a matching user in the database with the wrong case in email' do
+      @user = User.new(first_name: 'FirstName', last_name: 'LastName', email: 'test@example.com', password: 'secret', password_confirmation: 'secret')
+      @user.email.downcase!
+      @user.save
+      @user_check = User.authenticate_with_credentials('TEST@example.com', 'secret')
+      expect(@user_check).to be_truthy
+    end
   end
 end
