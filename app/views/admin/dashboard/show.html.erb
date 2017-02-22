@@ -1,2 +1,9 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<br>
+<h1>Admin » Dashboard</h1>
+<hr>
+<h3>Admin currently logged in:</h3>
+<% if current_user.email != nil %>
+  <h3><%= current_user.email %></h3>
+<% else %>
+  <p>Anonymous</p>
+<% end %>
