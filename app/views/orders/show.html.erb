@@ -6,7 +6,11 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
-    <h5>Order placed with <strong><%= @order.email %></strong>.</h5>
+    <% unless @order.email == 'kvirani@gmail.com' %>
+      <h5>Order placed with <strong><%= @order.email %></strong>.</h5>
+    <% else %>
+      <h5>Order placed by an anonymous visitor</h5>
+    <% end %>
     <br>
     <h4>Order Details:</h4>
     <div class="panel panel-default items">

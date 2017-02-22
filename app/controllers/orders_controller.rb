@@ -39,10 +39,16 @@ class OrdersController < ApplicationController
   end
 
   def create_order(stripe_charge)
-    if current_user.email == nil
-      email = params[:stripeEmail]
-    else
+    # if current_user.email == nil
+    #   email = params[:stripeEmail]
+    # else
+    #   email = current_user.email
+    # end
+
+    if current_user
       email = current_user.email
+    else
+      email = params[:stripeEmail]
     end
 
     order = Order.new(
