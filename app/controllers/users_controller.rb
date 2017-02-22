@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    user.email.strip!.downcase!
+    user.email.strip.downcase!
     if user.save
       session[:user_id] = user.id
       redirect_to '/'
