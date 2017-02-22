@@ -12,6 +12,20 @@
     <%= link_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary', method: :put do %>
       <%= fa_icon "shopping-cart", text: 'Add' %>
     <% end %>
+    <% if product.reviews.any? %>
+      <% sum = 0 %>
+      <% product.reviews.each do |review| %>
+        <% sum += review.rating %>
+      <% end %>
+      <% if sum / product.reviews.size == sum.to_f / product.reviews.size %>
+        &emsp;<%= sum / product.reviews.size %> / 5
+      <% else %>
+        &emsp;<%= (sum.to_f / product.reviews.size).round(1) %> / 5
+      <% end %>
+      <%= fa_icon "star", class: "gold" %>
+    <% else %>
+      &ensp;<em>No ratings</em>
+    <% end %>
     <%= link_to product, class: 'btn btn-default pull-right' do %>
       Details &raquo;
     <% end %>
