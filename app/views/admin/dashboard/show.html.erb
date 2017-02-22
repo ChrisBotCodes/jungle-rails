@@ -2,8 +2,8 @@
 <h1>Admin » Dashboard</h1>
 <hr>
 <h3>Admin currently logged in:</h3>
-<% if current_user.email != nil %>
-  <h3><%= current_user.email %></h3>
+<% if current_user %>
+  <h3><em><%= current_user.email %></em></h3>
 <% else %>
-  <p>Anonymous</p>
+  <h3><em>Anonymous</em></h3>
 <% end %>
